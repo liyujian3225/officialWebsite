@@ -2,19 +2,22 @@
   <div class="powerGrid">
     <div class="baseInfo">
       <div class="baseInfo_inner">
-        <p>用电业务</p>
+        <p>电网业务</p>
         <p>多年来，我公司专注于国家电网信息化系统的研发建设及运维服务，对国家电网信息化的建设、运维工作有着深刻的理解和认知，同时积累了丰富的技术服务经验。</p>
         <p>公司拥有一支精通数据中心、IT基础设施、数据主机系统数据库、网络、安全、存储、备份、视讯等技术领域的专业技术团队，在国家电网的数据中心机房建设、综合性广域网、信息安全、音视频集成等项目中具有扎实的技术实力，尤其是在电力调控自动化系统和通信网络建设方面有着非常丰富的架构设计、研发和实施经验。</p>
         <p>为更加深入的贯彻“面向用户的解决方案与及时响应的服务公司成立了专门的IT运维服务团队，常驻省、地级国家电网公司、电科院等重点用户单位，强调服务速度和效率，为用户提供设备维护、系统巡检、功能优化、运行监控等多种技术支持服务，真正保障了国家电网信息化系统的不间断运行。</p>
         <ul>
           <li>
             <img :src="a6" alt="">
+            <img :src="a6_" alt="">
           </li>
           <li>
             <img :src="a7" alt="">
+            <img :src="a7_" alt="">
           </li>
           <li>
             <img :src="a8" alt="">
+            <img :src="a8_" alt="">
           </li>
         </ul>
       </div>
@@ -65,6 +68,11 @@ export default {
       a6: require("@/assets/solution/a6.png"),
       a7: require("@/assets/solution/a7.png"),
       a8: require("@/assets/solution/a8.png"),
+
+      a6_: require("@/assets/solution/a6_.png"),
+      a7_: require("@/assets/solution/a7_.png"),
+      a8_: require("@/assets/solution/a8_.png"),
+
       powerGridList: [
         {
           title: "专业研发团队",
@@ -130,18 +138,30 @@ div.powerGrid {
         li {
           width: 387px;
           height: 100%;
-          background-image: linear-gradient(180deg, #FF8C88 0%, #FF0000 100%), linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 100%);
+          //background-image: linear-gradient(180deg, #FF8C88 0%, #FF0000 100%), linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 100%);
           border-radius: 10px;
+          position: relative;
           img {
             width: 100%;
             height: 100%;
             cursor: pointer;
-            opacity: 1;
             transition: opacity .35s linear;
+            position: absolute;
+            top: 0;
+            left: 0;
+            &:first-child {
+              opacity: 1;
+            }
+            &:last-child {
+              opacity: 0;
+            }
           }
           &:hover {
-            img {
+            img:first-child {
               opacity: 0;
+            }
+            img:last-child {
+              opacity: 1;
             }
           }
         }
@@ -178,6 +198,7 @@ div.powerGrid {
     position: relative;
     img.bg {
       display: block;
+      width: 100%;
       height: 100%;
     }
     div.softwareDevelopmentInner {

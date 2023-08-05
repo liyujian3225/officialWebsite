@@ -1,9 +1,9 @@
 <template>
   <div class="home">
-    <el-carousel class="bannerBlock" arrow="never" height="968px">
+    <el-carousel class="bannerBlock" arrow="never" :height="imgHeight + 'px'">
       <el-carousel-item v-for="(item, index) in bannerList" :key="index">
         <div class="carousel-card">
-          <img :src="item.bannerImg" alt="">
+          <img ref="img" :src="item.bannerImg" alt="">
           <div class="description">
             <p class="bigTxt">HELI</p>
             <p class="bigTxt">INNOVATION</p>
@@ -185,6 +185,7 @@ export default {
     }
     return {
       anchorPoint: this.$route.query.anchorPoint,
+      imgHeight: 0,
       bannerList: [
         {
           bannerImg: require("@/assets/home/banner1.png"),
@@ -241,13 +242,31 @@ export default {
   },
   mounted() {
     if(this.anchorPoint) this.handleScroll(this.anchorPoint);
+    this.imgLoad();
+    // 监听窗口变化，使得轮播图高度自适应图片高度
+    window.addEventListener("resize", () => {
+      if (this.$refs.img[0]) {
+        this.imgHeight = this.$refs.img[0].height;
+      }
+    });
   },
   methods: {
     handleScroll(id) {
       const element = document.getElementById(id);
       element.scrollIntoView();
-    }
-  }
+    },
+    imgLoad() {
+      this.$nextTick(function () {
+        // 获取窗口宽度*图片的比例，定义页面初始的轮播图高度
+        this.imgHeight = (document.body.clientWidth * 1) / 2;
+      });
+    },
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", () => {
+      this.imgHeight = this.$refs.img[0].height;
+    });
+  },
 }
 </script>
 <style lang="scss" scoped>
@@ -255,16 +274,21 @@ div.home {
   .carousel-card {
     width: 100%;
     height: 100%;
+    overflow: hidden;
     position: relative;
     img {
-      height: 100%;
+      width: 100%;
     }
     div.description {
       width: 1200px;
       position: absolute;
-      top: 225px;
-      left: 171px;
+      top: 0; bottom: 0;
+      left: 0; right: 0;
+      margin: auto;
       z-index: 10;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       p.bigTxt {
         color: rgba(255, 255, 255, 0.8);
         font-size: 100px;

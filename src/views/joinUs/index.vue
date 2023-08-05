@@ -1,19 +1,14 @@
 <template>
   <div class="joinUs">
-    <div class="banner">
-      <el-carousel arrow="never" indicator-position="none" height="640px">
-        <el-carousel-item>
-          <img :src="bannerImage" alt="">
-        </el-carousel-item>
-      </el-carousel>
-      <div class="description">
-        <p>加入我们</p>
-        <p>加入“合力创新”共创心视界，我们在这里等你！</p>
+    <custom-carousel :banner-list="bannerList">
+      <template #description>
+        <p class="mainDes">加入我们</p>
+        <p class="subDes">加入“合力创新”共创心视界，我们在这里等你！</p>
         <div class="more">
           <span>了解更多</span>
         </div>
-      </div>
-    </div>
+      </template>
+    </custom-carousel>
     <div class="content">
       <p>加入我们</p>
       <el-collapse v-model="activeNames" accordion>
@@ -53,57 +48,41 @@
 </template>
 <script>
 import JobsData from "./Jobs.json"
+import customCarousel from "@/components/customCarousel"
 export default {
-  components: {},
+  components: { customCarousel },
   data() {
     return {
-      bannerImage: require("@/assets/joinUs/banner.png"),
+      bannerList: [ require("@/assets/joinUs/banner.png") ],
       JobsData,
       activeNames: []
     }
-  }
+  },
 }
 </script>
 <style lang="scss" scoped>
 div.joinUs {
-  >div.banner {
-    width: 100%;
-    height: 640px;
-    position: relative;
-    img {
-      width: 1920px;
-    }
-    div.description {
-      width: 1200px;
-      position: absolute;
-      top: 225px;
-      left: 0;
-      right: 0;
-      margin: auto;
-      z-index: 10;
-      p:first-child {
-        font-size: 36px;
-        color: #ffffff;
-        font-weight: bold;
-        margin-bottom: 30px;
-      }
-      p:nth-child(2) {
-        font-size: 16px;
-        color: #ffffff;
-        margin-bottom: 40px;
-      }
-      div.more {
-        width: 96px;
-        height: 38px;
-        line-height: 38px;
-        text-align: center;
-        border: 1px solid rgba(151,151,151,1);
-        cursor: pointer;
-        span {
-          font-size: 14px;
-          color: #ffffff;
-        }
-      }
+  p.mainDes {
+    font-size: 36px;
+    color: #ffffff;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+  p.subDes {
+    font-size: 16px;
+    color: #ffffff;
+    margin-bottom: 40px;
+  }
+  div.more {
+    width: 96px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    border: 1px solid rgba(151,151,151,1);
+    cursor: pointer;
+    span {
+      font-size: 14px;
+      color: #ffffff;
     }
   }
   >div.content {

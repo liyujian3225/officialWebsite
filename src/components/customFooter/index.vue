@@ -59,7 +59,7 @@ export default {
           name: "解决方案",
           content: [
             { name: "发电业务", path: "powerPlant" },
-            { name: "用电业务", path: "powerGrid" },
+            { name: "电网业务", path: "powerGrid" },
             { name: "电力能源综合服务", path: "electricalEnergy" },
             { name: "售电业务", path: "sellingElectricity" },
           ]
