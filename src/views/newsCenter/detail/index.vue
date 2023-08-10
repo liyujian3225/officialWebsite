@@ -24,14 +24,13 @@
   </div>
 </template>
 <script>
-import newsData from "../news.json"
 export default {
   data() {
     return {
-      newsData,
-      id: this.$route.query.id,
+      createTime: this.$route.query.createTime,
       articleData: {},
-      titleList: newsData.map(item => item.title)
+      newsData: [],
+      titleList: []
     }
   },
   computed: {
@@ -43,9 +42,21 @@ export default {
     },
   },
   created() {
-    this.articleData = newsData[this.id];
+    this.initSourceData();
   },
   methods: {
+    initSourceData() {
+      //置顶新闻
+      const importFiles = require.context('@/assets/article/import', false, /\.json$/);
+      const importFilesData = importFiles.keys().map(file => importFiles(file));
+      //更多新闻
+      const moreFiles = require.context('@/assets/article', false, /\.json$/);
+      const moreFilesData = moreFiles.keys().map(file => moreFiles(file));
+      this.newsData = [...importFilesData, ...moreFilesData];
+
+      this.articleData = this.newsData.filter(item => item.createTime === this.createTime)[0];
+      this.titleList = this.newsData.map(item => item.title)
+    },
     switchArticle(type) {
       let id;
       if(type === "previous") {

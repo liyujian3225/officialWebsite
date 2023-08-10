@@ -13,7 +13,7 @@
       <div class="content_inner">
         <p>公司新闻</p>
         <ul class="articleCard">
-          <li v-for="(item, index) in newsData.slice(0, 3)" :key="index" @click="checkDetail(item)">
+          <li v-for="(item, index) in importFilesData" :key="index" @click="checkDetail(item)">
             <div class="imgBox">
               <img :src="item.cover" alt="">
             </div>
@@ -24,7 +24,7 @@
           <li class="areaTitle">更多新闻</li>
           <li
             class="articleTitle"
-            v-for="(item, index) in newsData.slice(3)"
+            v-for="(item, index) in moreFilesData"
             :key="index"
             @click="checkDetail(item)">
             <span>{{ item.title }}</span>
@@ -36,22 +36,36 @@
   </div>
 </template>
 <script>
-import newsData from "./news.json"
 import customCarousel from "@/components/customCarousel"
 export default {
   components: { customCarousel },
   data() {
     return {
-      newsData,
       bannerList: [ require("@/assets/newsCenter/banner.png") ],
+      importFilesData: [],
+      moreFilesData: [],
     }
   },
+  mounted() {
+    this.initSourceData();
+  },
   methods: {
+    initSourceData() {
+      //置顶新闻
+      const importFiles = require.context('@/assets/article/import', false, /\.json$/);
+      this.importFilesData = importFiles.keys().map(file => importFiles(file));
+      //更多新闻
+      const moreFiles = require.context('@/assets/article', false, /\.json$/);
+      this.moreFilesData = moreFiles.keys().map(file => moreFiles(file));
+
+      console.log("importFiles", importFiles);
+      console.log("moreFiles", moreFiles);
+    },
     checkDetail(item) {
-      const { id } = item;
+      const { createTime } = item;
       this.$router.push({
         name: "newsCenterDetail",
-        query: { id }
+        query: { createTime }
       });
     }
   }
