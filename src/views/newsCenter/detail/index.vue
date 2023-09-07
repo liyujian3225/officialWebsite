@@ -7,15 +7,21 @@
             <span class="newsCenter">新闻中心</span>
           </el-breadcrumb-item>
           <el-breadcrumb-item>
-            <span class="newsTitle">{{ articleData.title }}</span>
+            <span class="newsTitle">{{ articleData.newsTitle }}</span>
           </el-breadcrumb-item>
         </el-breadcrumb>
       </div>
     </div>
     <div class="articleArea">
-      <p class="article_title">{{ articleData.title }}</p>
-      <p class="article_date">{{ articleData.createTime }}</p>
-      <p class="article_content" v-html="articleData.content"></p>
+      <p class="article_title">{{ articleData.newsTitle }}</p>
+      <p class="article_date">{{ articleData.newsDate }}</p>
+
+      <template v-if="articleData.newsContent">
+        <div v-lazy-container="{ selector: 'img' }">
+          <p class="article_content" v-html="replaceAllImg(articleData.newsContent)"></p>
+        </div>
+      </template>
+
       <div class="switch">
         <span :class="{ disabled: !previousBtnTitle }" @click="switchArticle('previous')">上一篇：{{ previousBtnTitle || '-' }}</span>
         <span :class="{ disabled: !nextBtnTitle }" @click="switchArticle('next')">下一篇：{{ nextBtnTitle || '-' }}</span>
@@ -24,51 +30,80 @@
   </div>
 </template>
 <script>
+import http from '@/apiRequest/http'
+
 export default {
   data() {
     return {
-      createTime: this.$route.query.createTime,
-      articleData: {},
-      newsData: [],
-      titleList: []
+      id: this.$route.query.id,
+      articleData: {},  //当前新闻数据
+      allNewData: [],     //全部新闻标题数据
+      previousBtnTitle: "",
+      nextBtnTitle: "",
+
+      previousBtnId: "",
+      nextBtnId: "",
     }
   },
-  computed: {
-    previousBtnTitle: function() {
-      return this.titleList[this.id - 1]
-    },
-    nextBtnTitle: function() {
-      return this.titleList[this.id + 1]
-    },
-  },
   created() {
-    this.initSourceData();
+    this.initData();
+    this.getAllNews();
   },
   methods: {
-    initSourceData() {
-      //置顶新闻
-      const importFiles = require.context('@/assets/article/import', false, /\.json$/);
-      const importFilesData = importFiles.keys().map(file => importFiles(file));
-      //更多新闻
-      const moreFiles = require.context('@/assets/article', false, /\.json$/);
-      const moreFilesData = moreFiles.keys().map(file => moreFiles(file));
-      this.newsData = [...importFilesData, ...moreFilesData];
+    initData() {
+      http.post('/company-homepage/api/news/findById', { id: this.id }).then((response) => {
+        const { code, data } = response;
+        if(code === '0000') {
+          this.articleData = data;
+        }
+      })
+    },
+    getAllNews() {
+      http.post('/company-homepage/api/news/findListByParam', {
+        "pageNum": 1,
+        "pageSize": 1000,
+        "searchHistoryParam": "newsManagement",
+        "content": "",
+      }).then((response) => {
+        const { code, data } = response;
+        if(code === '0000') {
+          const { pageData } = data;
+          this.allNewData = pageData;
 
-      this.articleData = this.newsData.filter(item => item.createTime === this.createTime)[0];
-      this.titleList = this.newsData.map(item => item.title)
+          const currentIndex = pageData.findIndex(item => { return item.id === this.id });
+          if(currentIndex === 0) {
+            this.previousBtnTitle = "";
+            this.nextBtnTitle = pageData[currentIndex + 1].newsTitle;
+          }else if(currentIndex === pageData.length - 1) {
+            this.previousBtnTitle = pageData[currentIndex - 1].newsTitle;
+            this.nextBtnTitle = "";
+          }else {
+            this.previousBtnTitle = pageData[currentIndex - 1].newsTitle;
+            this.nextBtnTitle = pageData[currentIndex + 1].newsTitle;
+          }
+
+          this.previousBtnId = this.previousBtnTitle ? pageData[currentIndex - 1].id : "";
+          this.nextBtnId = this.nextBtnTitle ? pageData[currentIndex + 1].id : "";
+        }
+      })
     },
     switchArticle(type) {
       let id;
       if(type === "previous") {
         if(!this.previousBtnTitle) return;
-        id = this.id - 1;
+        id = this.previousBtnId;
       }else {
         if(!this.nextBtnTitle) return;
-        id = this.id + 1
+        id = this.nextBtnId;
       }
       this.$router.push({
         name: "newsCenterDetail",
         query: { id }
+      });
+    },
+    replaceAllImg(html) {
+      return html.replace(/<img[^>]*>/gi, function (str, capture) {
+        return str.replace(/src=/gi, 'data-src=');
       });
     }
   }
@@ -120,21 +155,22 @@ div.newsCenterArea {
       margin-bottom: 54px;
     }
     p.article_content {
-      font-size: 16px;
-      color: #333333;
-      line-height: 32px;
-      text-indent: 2em;
       padding-bottom: 60px;
       border-bottom: 1px solid #9b9b9b;
       margin-bottom: 30px;
       ::v-deep {
         p {
           font-size: 14px;
-          color: #333333;
-          line-height: 32px;
+          color: #666666;
+          line-height: 28px;
+          text-align: justify;
+          padding: 10px 0;
         }
         img {
-          margin-top: 30px;
+          margin-bottom: -10px;
+        }
+        div[data-w-e-type=video] {
+          text-align: center;
         }
       }
     }

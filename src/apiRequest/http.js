@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { Loading } from 'element-ui';
-import { getItem } from "@/utils/storage";
 import { Message } from 'element-ui';
 
 const service = axios.create({
@@ -18,11 +17,10 @@ service.interceptors.request.use(config => {
   }
   loadingInstance = Loading.service({
     lock: true,
-    text: 'Loading',
+    text: '加载中...',
     spinner: 'el-icon-loading',
     background: 'rgba(0, 0, 0, 0.7)'
   });
-  config.headers.Authorization = getItem("token") || "";
   return config
 }, error => {
   return Promise.reject('请求出错')

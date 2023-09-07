@@ -34,6 +34,12 @@ const i18n = new VueI18n({
 })
 ElementLocale.i18n((key, value) => i18n.t(key, value))
 
+import VueLazyLoad from 'vue-lazyload'
+Vue.use(VueLazyLoad , {
+  attempt: 1, //加载错误后最大尝试次数
+  preLoad: 1.3, //提前加载高度（数字 1 表示 1 屏的高度）
+})
+
 // import x2js from 'x2js'
 // Vue.prototype.$x2js = new x2js()
 

@@ -13,22 +13,27 @@
       <div class="content_inner">
         <p>公司新闻</p>
         <ul class="articleCard">
-          <li v-for="(item, index) in importFilesData" :key="index" @click="checkDetail(item)">
+          <li
+            v-for="item in importantNewsData"
+            :key="item.id"
+            @click="checkDetail(item)"
+          >
             <div class="imgBox">
-              <img :src="item.cover" alt="">
+              <img :src="item.newsCover" alt="" />
             </div>
-            <p class="title">{{ item.title }}</p>
+            <p class="title">{{ item.newsTitle }}</p>
           </li>
         </ul>
         <ul class="articleList">
           <li class="areaTitle">更多新闻</li>
           <li
             class="articleTitle"
-            v-for="(item, index) in moreFilesData"
-            :key="index"
-            @click="checkDetail(item)">
-            <span>{{ item.title }}</span>
-            <span>{{ item.createTime}}</span>
+            v-for="item in moreNewsData"
+            :key="item.id"
+            @click="checkDetail(item)"
+          >
+            <span>{{ item.newsTitle }}</span>
+            <span>{{ item.newsDate }}</span>
           </li>
         </ul>
       </div>
@@ -36,37 +41,54 @@
   </div>
 </template>
 <script>
-import customCarousel from "@/components/customCarousel"
+import customCarousel from '@/components/customCarousel'
+import http from '@/apiRequest/http'
 export default {
   components: { customCarousel },
   data() {
     return {
-      bannerList: [ require("@/assets/newsCenter/banner.png") ],
-      importFilesData: [],
-      moreFilesData: [],
+      bannerList: [require('@/assets/newsCenter/banner.png')],
+      importantNewsData: [],
+      moreNewsData: [],
+      searchForm: {
+        "pageNum": 1,
+        "pageSize": 100,
+        "searchHistoryParam": "newsManagement",
+        "content": "",
+        "dataType": "1",  //查询更多信息
+        "sort": "newsDate",
+        "order": "desc"
+      }
     }
   },
   mounted() {
-    this.initSourceData();
+    this.getImportantNews();
+    this.getMoreNews();
   },
   methods: {
-    initSourceData() {
-      //置顶新闻
-      const importFiles = require.context('@/assets/article/import', false, /\.json$/);
-      this.importFilesData = importFiles.keys().map(file => importFiles(file));
-      //更多新闻
-      const moreFiles = require.context('@/assets/article', false, /\.json$/);
-      this.moreFilesData = moreFiles.keys().map(file => moreFiles(file));
-
-      console.log("importFiles", importFiles);
-      console.log("moreFiles", moreFiles);
+    getImportantNews() {
+      http.post('/company-homepage/api/news/findTopList').then((response) => {
+        const { code, data } = response;
+        if(code === '0000') {
+          this.importantNewsData = data;
+        }
+      })
+    },
+    getMoreNews() {
+      http.post('/company-homepage/api/news/findListByParam', this.searchForm).then((response) => {
+        const { code, data } = response;
+        if(code === '0000') {
+          const { pageData, totalSize } = data;
+          this.moreNewsData = pageData;
+        }
+      })
     },
     checkDetail(item) {
-      const { createTime } = item;
+      const { id } = item
       this.$router.push({
-        name: "newsCenterDetail",
-        query: { createTime }
-      });
+        name: 'newsCenterDetail',
+        query: { id }
+      })
     }
   }
 }
@@ -81,7 +103,7 @@ div.newsCenter {
   }
   p.subDes {
     font-size: 16px;
-    color: #FFFFFF;
+    color: #ffffff;
     opacity: 0.8;
     margin-bottom: 40px;
   }
@@ -90,22 +112,22 @@ div.newsCenter {
     height: 38px;
     line-height: 38px;
     text-align: center;
-    border: 1px solid #FFFFFF;
+    border: 1px solid #ffffff;
     cursor: pointer;
     span {
       font-size: 14px;
       color: #ffffff;
     }
   }
-  >div.content {
+  > div.content {
     width: 100%;
     background: #f9f9f9;
-    >div.content_inner {
+    > div.content_inner {
       width: 1260px;
       margin: 0 auto;
       padding-bottom: 60px;
       overflow: hidden;
-      >p {
+      > p {
         font-size: 28px;
         color: #000000;
         line-height: 30px;
@@ -113,15 +135,15 @@ div.newsCenter {
         margin-top: 80px;
         margin-bottom: 60px;
       }
-      >ul.articleCard {
+      > ul.articleCard {
         display: flex;
         flex-wrap: wrap;
         padding: 0 30px;
-        >li {
+        > li {
           width: 380px;
           height: 300px;
-          background: #FFFFFF;
-          box-shadow: 0 2px 15px 0 rgba(0,0,0,0.18);
+          background: #ffffff;
+          box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.18);
           border-radius: 10px;
           margin-right: 30px;
           cursor: pointer;
@@ -129,13 +151,13 @@ div.newsCenter {
             margin-right: 0;
           }
           &:hover {
-            >div.imgBox {
+            > div.imgBox {
               img {
                 transform: scale(1.05);
               }
             }
           }
-          >div.imgBox {
+          > div.imgBox {
             width: 380px;
             height: 184px;
             margin-bottom: 30px;
@@ -148,7 +170,7 @@ div.newsCenter {
               transition: all 500ms;
             }
           }
-          >p.title {
+          > p.title {
             width: 100%;
             height: 56px;
             line-height: 28px;
@@ -166,7 +188,7 @@ div.newsCenter {
           }
         }
       }
-      >ul.articleList {
+      > ul.articleList {
         width: 1200px;
         margin: 30px auto 0;
         li.areaTitle {
@@ -189,7 +211,7 @@ div.newsCenter {
           span:first-child {
             color: #666666;
             cursor: pointer;
-            transition: color .35s linear;
+            transition: color 0.35s linear;
             &:hover {
               color: #ff0000;
             }
