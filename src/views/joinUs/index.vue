@@ -53,7 +53,7 @@ export default {
   components: { customCarousel },
   data() {
     return {
-      bannerList: [ require("@/assets/joinUs/banner.png") ],
+      bannerList: [ require("@/assets/joinUs/banner.jpg") ],
       JobsData,
       activeNames: []
     }

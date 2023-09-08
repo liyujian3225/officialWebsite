@@ -35,6 +35,16 @@
             <span>{{ item.newsTitle }}</span>
             <span>{{ item.newsDate }}</span>
           </li>
+          <li class="pagination">
+            <el-pagination
+              background
+              :page-size="searchForm.pageSize"
+              :current-page="searchForm.pageNum"
+              layout="total, prev, pager, next"
+              @current-change="handleChangeCurrent"
+              :total="totalSize">
+            </el-pagination>
+          </li>
         </ul>
       </div>
     </div>
@@ -50,9 +60,10 @@ export default {
       bannerList: [require('@/assets/newsCenter/banner.png')],
       importantNewsData: [],
       moreNewsData: [],
+      totalSize: 0,
       searchForm: {
         "pageNum": 1,
-        "pageSize": 100,
+        "pageSize": 10,
         "searchHistoryParam": "newsManagement",
         "content": "",
         "dataType": "1",  //查询更多信息
@@ -80,8 +91,13 @@ export default {
         if(code === '0000') {
           const { pageData, totalSize } = data;
           this.moreNewsData = pageData;
+          this.totalSize = totalSize;
         }
       })
+    },
+    handleChangeCurrent(v) {
+      this.searchForm.pageNum = v;
+      this.getMoreNews();
     },
     checkDetail(item) {
       const { id } = item
@@ -218,6 +234,13 @@ div.newsCenter {
           }
           span:last-child {
             color: #999999;
+          }
+        }
+        li.pagination {
+          margin-top: 20px;
+          text-align: right;
+          .el-pagination {
+            padding: 0;
           }
         }
       }

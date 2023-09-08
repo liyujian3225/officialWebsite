@@ -39,9 +39,9 @@ export default {
   data() {
     return {
       bannerList: [ require("@/assets/contactUs/banner.png") ],
-      addressIcon: require("@/assets/address.svg"),
-      emailIcon: require("@/assets/email.svg"),
-      phoneIcon: require("@/assets/phone.svg")
+      addressIcon: require("@/assets/contactUs/address.svg"),
+      emailIcon: require("@/assets/contactUs/email.svg"),
+      phoneIcon: require("@/assets/contactUs/phone.svg")
     }
   },
 

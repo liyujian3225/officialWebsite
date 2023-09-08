@@ -44,7 +44,7 @@ export default {
       //logo相关
       logoImg: require("@/assets/home/logo.png"), //浅色logo
       logoDarkImg: require("@/assets/home/logoDark.png"),  //暗黑logo
-      logoUrl: "",
+      logoUrl: require("@/assets/home/logo.png"),
       //菜单相关
       navList: ["home", "productCenter", "solution", "newsCenter", "joinUs", "contactUs"],
       navActive: "home",

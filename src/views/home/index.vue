@@ -188,21 +188,21 @@ export default {
       imgHeight: 0,
       bannerList: [
         {
-          bannerImg: require("@/assets/home/banner1.png"),
+          bannerImg: require("@/assets/home/banner1.jpg"),
           officialDocuments: [
             "聚焦电力领域",
             "创新未来服务",
           ]
         },
         {
-          bannerImg: require("@/assets/home/banner2.png"),
+          bannerImg: require("@/assets/home/banner2.jpg"),
           officialDocuments: [
             "数据重塑能源",
             "科技演绎未来",
           ]
         },
         {
-          bannerImg: require("@/assets/home/banner3.png"),
+          bannerImg: require("@/assets/home/banner3.jpg"),
           officialDocuments: [
             "打造优质能源服务",
             "承担未来电力责任",
