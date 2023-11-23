@@ -23,13 +23,13 @@
       </div>
     </div>
     <div class="content">
-      <p class="title">系统集成—电力全覆盖接入平台</p>
+      <p class="title">系统集成接入平台</p>
       <p class="subtitle"> 系统采用标准IEC-104、modbus等协议进行底层技术实现，满足“安全分区、网络专用、横向隔离、纵向认证”的安全要求。实现对光伏站、小火电、水电站风电场等各型电站的数据采集、运行监视、参数配置等，满足地区小电站的安全并网及调度运行管理。</p>
       <img :src="a1" alt="">
-      <p class="title">数据中心—系统集成及运维服务</p>
+      <p class="title">数据中心集成运维</p>
       <p class="subtitle" style="text-align: center;">数据中心资源监控 数据中心基础设施管理系统（DCIM）</p>
       <img :src="a2" alt="">
-      <p class="title">数据通信—系统集成及运维服务</p>
+      <p class="title">数据通信集成运维</p>
       <p class="subtitle" style="text-align: center;">电力传输网 调度生产网 信息管理网络建设</p>
       <img :src="a3" alt="" style="margin-bottom: 80px;">
     </div>

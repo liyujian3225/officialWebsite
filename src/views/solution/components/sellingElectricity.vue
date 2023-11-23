@@ -82,11 +82,9 @@ export default {
 div.sellingElectricity {
   div.baseInfo {
     width: 100%;
-    height: 770px;
     background: #f1f1f1;
     div.baseInfo_inner {
       width: 1200px;
-      height: 770px;
       margin: 0 auto;
       overflow: hidden;
       p:first-child {
@@ -96,9 +94,9 @@ div.sellingElectricity {
         margin: 80px auto 40px;
       }
       img {
-        width: 1020px;
-        margin: 0 auto 80px;
-        transform: translateX(80px);
+        display: block;
+        width: 804px;
+        margin: 0 auto 20px;
       }
       //p:last-child {
       //  line-height: 28px;

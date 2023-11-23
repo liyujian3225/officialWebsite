@@ -26,7 +26,12 @@
       </div>
     </div>
     <div class="copyRight">
-      <span>晋ICP备16004397号-2</span>
+      <div>
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=14019202000516">
+          <img src="../../assets/home/record.png"/>
+          <p>晋公网安备 14019202000516号</p>
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -51,8 +56,8 @@ export default {
           content: [
             { name: "NVIM网络可视化智慧管理平台", path: "nvim" },
             { name: "电力能源综合数字平台", path: "electricalEnergyPlatform" },
-            { name: "源荷储一体化并网测试平台", path: "sourceChargeStorage" },
-            { name: "机房一体化智慧监控平台", path: "machineRoom" },
+            { name: "源荷储涉网实验报名分析平台", path: "sourceChargeStorage" },
+            { name: "DVIM数据中心可视化智慧管理平台", path: "machineRoom" },
           ]
         },
         {
@@ -147,12 +152,29 @@ div.footer {
   >div.copyRight {
     width: 100%;
     height: 70px;
-    line-height: 70px;
-    text-align: center;
     background: #1A1C1D;
-    span {
-      font-size: 14px;
-      color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    >div {
+      height: 20px;
+      a {
+        display:inline-block;
+        text-decoration:none;
+        height:20px;
+        line-height:20px;
+        img {
+          float: left;
+        }
+        p {
+          float: left;
+          height: 20px;
+          line-height: 20px;
+          margin: 0 0 0 5px;
+          color: #ffffff;
+          font-size: 14px;
+        }
+      }
     }
   }
 }

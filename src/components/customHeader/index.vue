@@ -62,12 +62,12 @@ export default {
           ]
         },
         productCenter: {
-          width: "218px",
+          width: "250px",
           list: [
             { name: "NVIM网络可视化智慧管理平台", path: "nvim" },
             { name: "电力能源综合数字平台", path: "electricalEnergyPlatform" },
-            { name: "源荷储一体化并网测试平台", path: "sourceChargeStorage" },
-            { name: "机房一体化智慧监控平台", path: "machineRoom" },
+            { name: "源荷储涉网实验报名分析平台", path: "sourceChargeStorage" },
+            { name: "DVIM数据中心可视化智慧管理平台", path: "machineRoom" },
           ]
         },
         solution: {
