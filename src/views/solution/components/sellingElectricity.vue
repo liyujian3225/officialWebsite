@@ -218,6 +218,7 @@ div.sellingElectricity {
           color: #7C7A7A;
           position: relative;
           z-index: 2;
+          text-align: justify;
         }
       }
     }

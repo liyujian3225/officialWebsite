@@ -6,27 +6,6 @@
         <p class="content">为解决安全用电、能效优化、精细化用电管理问题，合力创新在传统电力建设的基础上，依托物联网技术，研发搭建了电力能源综合服务平台，帮助企业进行技改大修与线上线下的日常托管运维，让用户可以智能用电、安全用电、放心用电，平台目前已经接入200余家山西各地市工商业用户。</p>
       </div>
     </div>
-<!--    <div class="challenge">-->
-<!--      <p>电力用户常见问题或困惑</p>-->
-<!--      <div class="challenge_inner">-->
-<!--        <img :src="questionMark" alt="">-->
-<!--        <div class="singleColumn" v-for="(item, index) in questionMarkList.slice(0, 2)">-->
-<!--          <p class="title">{{ item.title }}</p>-->
-<!--          <p class="content" v-for="j in item.content">{{ j }}</p>-->
-<!--        </div>-->
-<!--        <div class="specialSingleColumn"  v-for="(item, index) in questionMarkList.slice(2, 3)">-->
-<!--          <p class="title">{{ item.title }}</p>-->
-<!--          <ul>-->
-<!--            <li>-->
-<!--              <p class="content" v-for="j in item.content.slice(0, 2)">{{ j }}</p>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--              <p class="content" v-for="j in item.content.slice(2, 4)">{{ j }}</p>-->
-<!--            </li>-->
-<!--          </ul>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
     <div class="solution">
       <p class="title">电力能源综合服务解决方案</p>
       <p class="subtitle">1、电力物联网服务体系</p>
@@ -234,6 +213,7 @@ div.electricalEnergy {
       color: #666666;
       text-indent: 2em;
       margin-bottom: 60px;
+      text-align: justify;
     }
     >img {
       display: block;

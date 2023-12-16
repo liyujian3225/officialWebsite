@@ -30,7 +30,7 @@
       <p class="subtitle" style="text-align: center;">数据中心资源监控 数据中心基础设施管理系统（DCIM）</p>
       <img :src="a2" alt="">
       <p class="title">数据通信集成运维</p>
-      <p class="subtitle" style="text-align: center;">电力传输网 调度生产网 信息管理网络建设</p>
+      <p class="subtitle" style="text-align: center;text-indent: 0;">电力传输网 调度生产网 信息管理网络建设</p>
       <img :src="a3" alt="" style="margin-bottom: 80px;">
     </div>
     <div class="softwareDevelopment">
@@ -127,6 +127,7 @@ div.powerGrid {
           color: #666666;
           line-height: 28px;
           text-indent: 2em;
+          text-align: justify;
         }
       }
       >ul {
@@ -173,7 +174,7 @@ div.powerGrid {
     margin: 0 auto;
     overflow: hidden;
     p.title {
-      font-size: 28px;
+      font-size: 24px;
       color: #000000;
       text-align: center;
       margin-top: 80px;
@@ -213,7 +214,7 @@ div.powerGrid {
       padding-top: 80px;
       box-sizing: border-box;
       p.title {
-        font-size: 28px;
+        font-size: 24px;
         color: #000000;
         text-align: center;
         margin-bottom: 40px;

@@ -36,7 +36,7 @@ export default {
       productList: [
         { name: "NVIM网络可视化智慧管理平台", path: "nvim" },
         { name: "电力能源综合数字平台", path: "electricalEnergyPlatform" },
-        { name: "源荷储涉网实验报名分析平台", path: "sourceChargeStorage" },
+        { name: "源荷储涉网试验报告分析平台", path: "sourceChargeStorage" },
         { name: "DVIM数据中心可视化智慧管理平台", path: "machineRoom" },
       ]
     }

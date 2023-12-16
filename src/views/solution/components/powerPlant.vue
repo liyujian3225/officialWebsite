@@ -97,6 +97,7 @@ div.powerPlant {
         color: #666666;
         line-height: 28px;
         text-indent: 2em;
+        text-align: justify;
       }
     }
   }

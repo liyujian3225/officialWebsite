@@ -131,6 +131,7 @@ div.electricalEnergy {
           font-size: 14px;
           color: #666666;
           text-indent: 2em;
+          text-align: justify;
         }
       }
     }
@@ -202,6 +203,7 @@ div.electricalEnergy {
             transition: all .35s linear;
             position: relative;
             z-index: 2;
+            text-align: justify;
           }
           div.img {
             width: 64px;
@@ -285,12 +287,14 @@ div.electricalEnergy {
             left: -10px;
             top: 50%;
             transform: translateY(-100px);
+            text-align: justify;
           }
           &.article2 {
             position: absolute;
             right: 20px;
             top: 50%;
             transform: translateY(-100px);
+            text-align: justify;
           }
         }
       }

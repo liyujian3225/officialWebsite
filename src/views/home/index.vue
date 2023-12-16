@@ -355,14 +355,12 @@ div.home {
         margin-bottom: 40px;
       }
       p.paragraph {
-        font-size: 14px;
-        color: #666666;
         line-height: 28px;
+        font-size: 14px;
         font-weight: 400;
         text-indent: 2em;
-
         text-align: justify;
-
+        color: #666666;
         &:nth-child(2) {
           margin-bottom: 20px;
         }

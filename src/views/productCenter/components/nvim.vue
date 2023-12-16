@@ -127,6 +127,7 @@ div.nvim {
           font-size: 14px;
           color: #666666;
           text-indent: 2em;
+          text-align: justify;
         }
       }
     }
@@ -188,6 +189,7 @@ div.nvim {
             font-size: 14px;
             color: #666666;
             line-height: 28px;
+            text-align: justify;
             transition: all .35s linear;
             position: relative;
             z-index: 2;
@@ -269,6 +271,7 @@ div.nvim {
           font-size: 14px;
           color: #666666;
           line-height: 28px;
+          text-align: justify;
           &.article1 {
             position: absolute;
             left: 20px;
