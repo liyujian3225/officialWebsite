@@ -59,14 +59,16 @@ export default {
       ]
       //发散点
       const divergencePoints = [
-        { value: [85.294712, 41.371801], itemStyle: { color: '#FF0000' } },  //新疆
+        { value: [127.693002, 48.040469], itemStyle: { color: '#FF0000' } },  //黑龙江
+        { value: [126.171246, 43.703944], itemStyle: { color: '#FF0000' } },  //吉林
+        { value: [122.606135, 41.300702], itemStyle: { color: '#FF0000' } },  //辽宁
         { value: [116.41989, 40.189913], itemStyle: { color: '#FF0000' } },  //北京
-        { value: [117.351154, 39.28914], itemStyle: { color: '#FF0000' } },  //天津
-        { value: [118.186283, 36.374485], itemStyle: { color: '#FF0000' } }, //山东
-        { value: [120.109522, 29.181876], itemStyle: { color: '#FF0000' } }, //浙江
-        { value: [113.429877, 23.334664], itemStyle: { color: '#FF0000' } }, //广东
+        { value: [85.294712, 41.371801], itemStyle: { color: '#FF0000' } },  //新疆
+        { value: [100.823557, 38.058039], itemStyle: { color: '#FF0000' } },  //甘肃
         { value: [112.271042, 30.98802], itemStyle: { color: '#FF0000' } },  //湖北
         { value: [115.732937, 27.636129], itemStyle: { color: '#FF0000' } },  //江西
+        { value: [117.351154, 39.28914], itemStyle: { color: '#FF0000' } },  //天津
+        { value: [120.109522, 29.181876], itemStyle: { color: '#FF0000' } }, //浙江
       ]
       //飞线数据组合
       const linesData = divergencePoints.map(item => {
@@ -131,8 +133,17 @@ export default {
                 formatter: function(o) {
                   let { name } = o;
                   const rangeProvinceName = [
-                    "新疆维吾尔自治区", "北京市", "天津市", "山东省", "江西省",
-                    "浙江省", "广东省", "湖北省", "山西省",
+                    "黑龙江省",
+                    "吉林省",
+                    "辽宁省",
+                    "北京市",
+                    "新疆维吾尔自治区",
+                    "甘肃省",
+                    "湖北省",
+                    "江西省",
+                    "天津市",
+                    "浙江省",
+                    "山西省",
                   ]
                   if(rangeProvinceName.includes(name)) {
                     name = name.replace("市", "");

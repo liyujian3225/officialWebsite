@@ -172,10 +172,15 @@
   </div>
 </template>
 <script>
-import mapChart from "./components/chinaMap"
+import mapChart from "./components/chinaMap";
+import moment from 'moment';
 export default {
   components: { mapChart },
   data() {
+    let a = moment();
+    let b = moment([2005, 2, 11]);
+    const yearEstablished = a.diff(b, 'year');
+
     const cooperativeClientList = () => {
       let list = [];
       for(let i = 0; i < 31; i++) {
@@ -212,7 +217,7 @@ export default {
       companyAnalysisList: [
         { name: "为发电企业提供服务", value: 200, num: "+" },
         { name: "荣誉资质", value: 120, num: "项" },
-        { name: "发展历程", value: 18, num: "年" },
+        { name: "发展历程", value: yearEstablished, num: "年" },
         { name: "打造“一站式”服务平台", value: 1, num: "站" },
       ],
       hLineImg: require("@/assets/home/hline.png"),
@@ -229,12 +234,12 @@ export default {
         [
           '电力需求侧管理服务能力二级', "山西省专精特新“小巨人”企业", '山西省高新技术企业',
           '山西省“四新”中小企业', "电子与智能化工程专业承包贰级证书", '“守合同重信用”企业',
-          '年度诚信企业', '承装（修、试）电力设施许可证', '山西省安全技术防范资质壹级',
+          '年度诚信企业', '承装（修、试）电力设施许可证', '山西省科技进步三等奖',
         ],
         [
           '输变电工程专业承包贰级资质', 'ISO45001职业健康体系认证', 'ISO27001信息安全管理证书',
           'ISO20000信息技术服务证书', 'ISO14001环境管理体系认证', 'ISO9000质量管理体系',
-          'CCRC-信息系统安全运维服务资质三级', 'CCRC-信息系统安全集成服务资质三级', '山西省科技进步三等奖',
+          'CCRC-信息系统安全运维服务资质三级', 'CCRC-信息系统安全集成服务资质三级',
         ],
       ],
       cooperativeClientList: cooperativeClientList(),
